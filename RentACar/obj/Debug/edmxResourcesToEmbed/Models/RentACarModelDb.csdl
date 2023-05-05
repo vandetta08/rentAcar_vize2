@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RentACarDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Araba">
+    <Key>
+      <PropertyRef Name="arabaId" />
+    </Key>
+    <Property Name="arabaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="arabaMarka" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arabaModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arabaRenk" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arabaKasaTipi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arabaYakit" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arabaKm" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arabaGorsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arabaFiyat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="arabaKategoriId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kategori" Relationship="Self.FK_Araba_ArabaKategori" FromRole="Araba" ToRole="Kategori" />
+    <Property Name="arabaKodu" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Araba" Relationship="Self.FK_Araba_ArabaKategori" FromRole="Kategori" ToRole="Araba" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="kullaniciId" />
+    </Key>
+    <Property Name="kullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullaniciAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="kullaniciTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="kullaniciMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="kullaniciParola" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="kullaniciYetki" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Mesajlar" Relationship="RentACarDbModel.FK_Mesajlar_alankullanici" FromRole="Kullanici" ToRole="Mesajlar" />
+    <NavigationProperty Name="Mesajlar1" Relationship="RentACarDbModel.FK_Mesajlar_kullanicigonderen" FromRole="Kullanici" ToRole="Mesajlar" />
+  </EntityType>
+  <Association Name="FK_Araba_ArabaKategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Araba" Type="Self.Araba" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="kategoriId" />
+      </Principal>
+      <Dependent Role="Araba">
+        <PropertyRef Name="arabaKategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RentACarDbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Araba" EntityType="Self.Araba" />
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+    <AssociationSet Name="FK_Araba_ArabaKategori" Association="Self.FK_Araba_ArabaKategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Araba" EntitySet="Araba" />
+    </AssociationSet>
+    <EntitySet Name="Mesajlar" EntityType="RentACarDbModel.Mesajlar" />
+    <AssociationSet Name="FK_Mesajlar_alankullanici" Association="RentACarDbModel.FK_Mesajlar_alankullanici">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Mesajlar" EntitySet="Mesajlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mesajlar_kullanicigonderen" Association="RentACarDbModel.FK_Mesajlar_kullanicigonderen">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Mesajlar" EntitySet="Mesajlar" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Mesajlar">
+    <Key>
+      <PropertyRef Name="MesajId" />
+    </Key>
+    <Property Name="MesajId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MesajGonderenId" Type="Int32" Nullable="false" />
+    <Property Name="MesajAlanId" Type="Int32" Nullable="false" />
+    <Property Name="MesajIcerik" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="MesajTarihi" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="MesajKonu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kullanici" Relationship="RentACarDbModel.FK_Mesajlar_alankullanici" FromRole="Mesajlar" ToRole="Kullanici" />
+    <NavigationProperty Name="Kullanici1" Relationship="RentACarDbModel.FK_Mesajlar_kullanicigonderen" FromRole="Mesajlar" ToRole="Kullanici" />
+  </EntityType>
+  <Association Name="FK_Mesajlar_alankullanici">
+    <End Type="RentACarDbModel.Kullanici" Role="Kullanici" Multiplicity="1" />
+    <End Type="RentACarDbModel.Mesajlar" Role="Mesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="Mesajlar">
+        <PropertyRef Name="MesajAlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mesajlar_kullanicigonderen">
+    <End Type="RentACarDbModel.Kullanici" Role="Kullanici" Multiplicity="1" />
+    <End Type="RentACarDbModel.Mesajlar" Role="Mesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="Mesajlar">
+        <PropertyRef Name="MesajGonderenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

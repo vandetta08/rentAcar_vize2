@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RentACarDbModelStoreContainer" CdmEntityContainer="RentACarDbEntities1">
+    <EntitySetMapping Name="Araba">
+      <EntityTypeMapping TypeName="RentACarDbModel.Araba">
+        <MappingFragment StoreEntitySet="Araba">
+          <ScalarProperty Name="arabaKodu" ColumnName="arabaKodu" />
+          <ScalarProperty Name="arabaId" ColumnName="arabaId" />
+          <ScalarProperty Name="arabaMarka" ColumnName="arabaMarka" />
+          <ScalarProperty Name="arabaModel" ColumnName="arabaModel" />
+          <ScalarProperty Name="arabaRenk" ColumnName="arabaRenk" />
+          <ScalarProperty Name="arabaKasaTipi" ColumnName="arabaKasaTipi" />
+          <ScalarProperty Name="arabaYakit" ColumnName="arabaYakit" />
+          <ScalarProperty Name="arabaKm" ColumnName="arabaKm" />
+          <ScalarProperty Name="arabaGorsel" ColumnName="arabaGorsel" />
+          <ScalarProperty Name="arabaFiyat" ColumnName="arabaFiyat" />
+          <ScalarProperty Name="arabaKategoriId" ColumnName="arabaKategoriId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategori">
+      <EntityTypeMapping TypeName="RentACarDbModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+          <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanici">
+      <EntityTypeMapping TypeName="RentACarDbModel.Kullanici">
+        <MappingFragment StoreEntitySet="Kullanici">
+          <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+          <ScalarProperty Name="kullaniciAdSoyad" ColumnName="kullaniciAdSoyad" />
+          <ScalarProperty Name="kullaniciTel" ColumnName="kullaniciTel" />
+          <ScalarProperty Name="kullaniciMail" ColumnName="kullaniciMail" />
+          <ScalarProperty Name="kullaniciParola" ColumnName="kullaniciParola" />
+          <ScalarProperty Name="kullaniciYetki" ColumnName="kullaniciYetki" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mesajlar">
+      <EntityTypeMapping TypeName="RentACarDbModel.Mesajlar">
+        <MappingFragment StoreEntitySet="Mesajlar">
+          <ScalarProperty Name="MesajKonu" ColumnName="MesajKonu" />
+          <ScalarProperty Name="MesajTarihi" ColumnName="MesajTarihi" />
+          <ScalarProperty Name="MesajIcerik" ColumnName="MesajIcerik" />
+          <ScalarProperty Name="MesajAlanId" ColumnName="MesajAlanId" />
+          <ScalarProperty Name="MesajGonderenId" ColumnName="MesajGonderenId" />
+          <ScalarProperty Name="MesajId" ColumnName="MesajId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
